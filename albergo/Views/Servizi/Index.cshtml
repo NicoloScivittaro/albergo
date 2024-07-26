@@ -1,0 +1,62 @@
+﻿@model IEnumerable<albergo.Models.ServizioAggiuntivo>
+
+@{
+    ViewData["Title"] = "Servizi";
+}
+
+<h2>Servizi</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Crea nuovo servizio</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Descrizione</th>
+            <th>Prezzo</th>
+            <th>Azioni</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Descrizione)</td>
+                <td>@item.Prezzo €</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Modifica</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">Dettagli</a>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(@item.Id)">Elimina</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function confirmDelete(id) {
+            if (confirm("Sei sicuro di voler eliminare questo servizio?")) {
+                $.ajax({
+                    url: '@Url.Action("Delete", "Servizi")',
+                    type: 'POST',
+                    data: JSON.stringify({ id: id }),
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (result) {
+                        if (result.success) {
+                            alert("Servizio eliminato con successo.");
+                            location.reload();
+                        } else {
+                            alert("Errore durante l'eliminazione del servizio: " + result.message);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        alert("Errore durante l'eliminazione del servizio: " + error);
+                    }
+                });
+            }
+        }
+    </script>
+}

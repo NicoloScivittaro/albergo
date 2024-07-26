@@ -1,0 +1,33 @@
+﻿@model albergo.Models.ServizioAggiuntivo
+
+@{
+    ViewData["Title"] = "Modifica Servizio Aggiuntivo";
+}
+
+<h2>Modifica Servizio</h2>
+
+<h4>Servizio</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit">
+            <div class="form-group mb-3">
+                <label asp-for="Descrizione" class="form-label"></label>
+                <input asp-for="Descrizione" class="form-control" />
+                <span asp-validation-for="Descrizione" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Prezzo" class="form-label"></label>
+                <input asp-for="Prezzo" class="form-control" />
+                <span asp-validation-for="Prezzo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Salva" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="mt-3">
+    <a asp-action="Index" class="btn btn-secondary">Indietro</a>
+</div>

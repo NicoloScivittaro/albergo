@@ -1,0 +1,80 @@
+﻿@model albergo.Models.Prenotazione
+
+@{
+    ViewData["Title"] = "Dettagli Prenotazione";
+}
+
+<h1>Dettagli Prenotazione</h1>
+
+<div>
+    <h4>Prenotazione</h4>
+    <hr />
+    <dl class="row">
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NumeroProgressivo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NumeroProgressivo)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Anno)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Anno)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Dal)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Dal)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Al)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Al)
+        </dd>
+
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Tariffa)
+        </dt>
+        <dd class="col-sm-10">
+            @String.Format("{0:C}", Html.DisplayFor(model => model.Tariffa))
+        </dd>
+
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cliente.Cognome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cliente.Cognome)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cliente.Nome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cliente.Nome)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Camera.Descrizione)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Camera.Descrizione)
+        </dd>
+
+        <dt class="col-sm-2">
+            Servizi Aggiuntivi
+        </dt>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Modifica</a> |
+    <a asp-action="Index" class="btn btn-primary">Indietro</a>
+</div>

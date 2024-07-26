@@ -1,0 +1,33 @@
+﻿@model albergo.Models.ServizioAggiuntivo
+
+@{
+    ViewData["Title"] = "Dettagli Servizio";
+}
+
+<h2>Dettagli Servizio</h2>
+
+<div class="row">
+    <div class="col-md-8">
+        <h4>Servizio</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Descrizione)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Descrizione)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Prezzo)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Prezzo) €
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Modifica</a>
+    <a asp-action="Index" class="btn btn-secondary">Indietro</a>
+</div>
