@@ -410,16 +410,12 @@ namespace albergo.DAO
             return new Prenotazione
             {
                 Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                ClienteCodiceFiscale = reader.GetString(reader.GetOrdinal("ClienteCodiceFiscale")),
-                NumeroCamera = reader.GetInt32(reader.GetOrdinal("NumeroCamera")),
-                DataPrenotazione = reader.GetDateTime(reader.GetOrdinal("DataPrenotazione")),
                 NumeroProgressivo = reader.GetInt32(reader.GetOrdinal("NumeroProgressivo")),
                 Anno = reader.GetInt32(reader.GetOrdinal("Anno")),
                 Dal = reader.GetDateTime(reader.GetOrdinal("Dal")),
                 Al = reader.GetDateTime(reader.GetOrdinal("Al")),
-                CaparraConfirmatoria = reader.IsDBNull(reader.GetOrdinal("CaparraConfirmatoria")) ? (decimal?)null : reader.GetDecimal(reader.GetOrdinal("CaparraConfirmatoria")),
+               
                 Tariffa = reader.GetDecimal(reader.GetOrdinal("Tariffa")),
-                TipoSoggiorno = reader.GetString(reader.GetOrdinal("TipoSoggiorno")),
                 Cliente = new Cliente
                 {
                     CodiceFiscale = reader.GetString(reader.GetOrdinal("ClienteCodiceFiscale")),
@@ -437,16 +433,11 @@ namespace albergo.DAO
 
         private void MapParameters(SqlCommand command, Prenotazione prenotazione)
         {
-            command.Parameters.AddWithValue("@ClienteCodiceFiscale", prenotazione.ClienteCodiceFiscale);
-            command.Parameters.AddWithValue("@NumeroCamera", prenotazione.NumeroCamera);
-            command.Parameters.AddWithValue("@DataPrenotazione", prenotazione.DataPrenotazione);
             command.Parameters.AddWithValue("@NumeroProgressivo", prenotazione.NumeroProgressivo);
             command.Parameters.AddWithValue("@Anno", prenotazione.Anno);
             command.Parameters.AddWithValue("@Dal", prenotazione.Dal);
             command.Parameters.AddWithValue("@Al", prenotazione.Al);
-            command.Parameters.AddWithValue("@CaparraConfirmatoria", (object)prenotazione.CaparraConfirmatoria ?? DBNull.Value);
             command.Parameters.AddWithValue("@Tariffa", prenotazione.Tariffa);
-            command.Parameters.AddWithValue("@TipoSoggiorno", prenotazione.TipoSoggiorno);
         }
     }
 }
