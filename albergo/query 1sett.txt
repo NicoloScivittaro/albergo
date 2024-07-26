@@ -1,0 +1,66 @@
+﻿
+
+
+CREATE TABLE [dbo].[Camere] (
+    [Numero]      INT            NOT NULL,
+    [Descrizione] NVARCHAR (255) NULL,
+    [Tipologia]   NVARCHAR (50)  NULL,
+    PRIMARY KEY CLUSTERED ([Numero] ASC),
+    CHECK ([Tipologia]='doppia' OR [Tipologia]='singola')
+);
+
+CREATE TABLE [dbo].[Clienti] (
+    [CodiceFiscale] NVARCHAR (16)  NOT NULL,
+    [Cognome]       NVARCHAR (50)  NOT NULL,
+    [Nome]          NVARCHAR (50)  NOT NULL,
+    [Citta]         NVARCHAR (50)  NULL,
+    [Provincia]     NVARCHAR (50)  NULL,
+    [Email]         NVARCHAR (100) NULL,
+    [Telefono]      NVARCHAR (20)  NULL,
+    [Cellulare]     NVARCHAR (20)  NULL,
+    PRIMARY KEY CLUSTERED ([CodiceFiscale] ASC)
+);
+
+CREATE TABLE [dbo].[Dipendenti] (
+    [Username]     NVARCHAR (50)  NOT NULL,
+    [PasswordHash] NVARCHAR (255) NOT NULL,
+    PRIMARY KEY CLUSTERED ([Username] ASC)
+);
+
+CREATE TABLE [dbo].[Prenotazioni] (
+    [Id]                   INT             IDENTITY (1, 1) NOT NULL,
+    [ClienteCodiceFiscale] NVARCHAR (16)   NOT NULL,
+    [NumeroCamera]         INT             NOT NULL,
+    [DataPrenotazione]     DATETIME        NOT NULL,
+    [NumeroProgressivo]    INT             NOT NULL,
+    [Anno]                 INT             NOT NULL,
+    [Dal]                  DATE            NOT NULL,
+    [Al]                   DATE            NOT NULL,
+    [CaparraConfirmatoria] DECIMAL (10, 2) NULL,
+    [Tariffa]              DECIMAL (10, 2) NOT NULL,
+    [TipoSoggiorno]        NVARCHAR (50)   NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC),
+    FOREIGN KEY ([ClienteCodiceFiscale]) REFERENCES [dbo].[Clienti] ([CodiceFiscale]),
+    FOREIGN KEY ([NumeroCamera]) REFERENCES [dbo].[Camere] ([Numero]),
+    CHECK ([TipoSoggiorno]='pernottamento con prima colazione' OR [TipoSoggiorno]='pensione completa' OR [TipoSoggiorno]='mezza pensione')
+);
+CREATE TABLE [dbo].[Servizi] (
+    [Id]             INT             IDENTITY (1, 1) NOT NULL,
+    [Nome]           NVARCHAR (100)  NOT NULL,
+    [PrezzoUnitario] DECIMAL (10, 2) NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+CREATE TABLE [dbo].[ServiziPrenotazioni] (
+    [Id]             INT             IDENTITY (1, 1) NOT NULL,
+    [PrenotazioneId] INT             NOT NULL,
+    [ServizioId]     INT             NOT NULL,
+    [Data]           DATETIME        NOT NULL,
+    [Quantita]       INT             NOT NULL,
+    [Prezzo]         DECIMAL (10, 2) NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC),
+    FOREIGN KEY ([PrenotazioneId]) REFERENCES [dbo].[Prenotazioni] ([Id]),
+    FOREIGN KEY ([ServizioId]) REFERENCES [dbo].[Servizi] ([Id])
+);
+
+
